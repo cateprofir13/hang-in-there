@@ -145,6 +145,13 @@ function showYourOwn() {
   posterFormHidden.classList.remove('hidden')
 }
 
+var buttonNevermind = document.querySelector('.show-main')
+buttonNevermind.addEventListener('click', neverMindTakeBack)
+function neverMindTakeBack() {
+  posterFormHidden.classList.add('hidden')
+  mainSection.classList.remove('hidden')
+}
+
 var buttonSavedPosters = document.querySelector('.show-saved')
 var savedPosters = document.querySelector('.saved-posters')
 buttonSavedPosters.addEventListener('click', showSavedPoster)
@@ -152,6 +159,11 @@ function showSavedPoster() {
   mainSection.classList.add('hidden')
   savedPosters.classList.remove('hidden')
 } 
+
 var buttonBackMain = document.querySelector('.back-to-main')
 buttonBackMain.addEventListener('click', backToMain)
-function bac
+function backToMain () {
+  savedPosters.classList.add('hidden')
+  mainSection.classList.remove('hidden')
+}
+
