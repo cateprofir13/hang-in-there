@@ -116,4 +116,23 @@ function createPoster(imageURL, title, quote) {
     imageURL: imageURL, 
     title: title, 
     quote: quote}
+  }
+// querying” the DOM to get access to the elements i need to change
+//  why i cant call imageurl directly on the funct, instead of the var i assigned to
+//“I don’t want to use the function name directly — I want to use the object that was returned when I called the function.”
+var posterImg = document.querySelector('.poster-img')
+var posterTitle = document.querySelector('.poster-title')
+var posterQuote = document.querySelector('.poster-quote')
+var myPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+posterImg.src = myPoster.imageURL
+posterTitle.innerText = myPoster.title
+posterQuote.innerText = myPoster.quote
+
+var buttonRandom = document.querySelector('.show-random')
+buttonRandom.addEventListener('click', showRandomPosters)
+function showRandomPosters () {
+  myPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+  posterImg.src = myPoster.imageURL
+  posterTitle.innerText = myPoster.title
+  posterQuote.innerText = myPoster.quote
 }
