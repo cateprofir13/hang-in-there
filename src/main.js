@@ -136,3 +136,22 @@ function showRandomPosters () {
   posterTitle.innerText = myPoster.title
   posterQuote.innerText = myPoster.quote
 }
+var buttonYourOwn = document.querySelector('.show-form')
+var posterFormHidden = document.querySelector('.poster-form')
+var mainSection = document.querySelector('.main-poster')
+buttonYourOwn.addEventListener('click', showYourOwn)
+function showYourOwn() {
+  mainSection.classList.add('hidden')
+  posterFormHidden.classList.remove('hidden')
+}
+
+var buttonSavedPosters = document.querySelector('.show-saved')
+var savedPosters = document.querySelector('.saved-posters')
+buttonSavedPosters.addEventListener('click', showSavedPoster)
+function showSavedPoster() {
+  mainSection.classList.add('hidden')
+  savedPosters.classList.remove('hidden')
+} 
+var buttonBackMain = document.querySelector('.back-to-main')
+buttonBackMain.addEventListener('click', backToMain)
+function bac
