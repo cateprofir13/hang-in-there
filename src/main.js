@@ -1,4 +1,26 @@
 // query selector variables go here 👇
+var posterImg = document.querySelector('.poster-img')
+var posterTitle = document.querySelector('.poster-title')
+var posterQuote = document.querySelector('.poster-quote')
+var buttonRandom = document.querySelector('.show-random')
+var buttonYourOwn = document.querySelector('.show-form')
+var posterFormHidden = document.querySelector('.poster-form')
+var mainSection = document.querySelector('.main-poster')
+var buttonNevermind = document.querySelector('.show-main')
+var buttonSavedPosters = document.querySelector('.show-saved')
+var savedPost = document.querySelector('.saved-posters')
+var savedPostersGrid = document.querySelector('.saved-posters-grid')
+var buttonBackMain = document.querySelector('.back-to-main')
+var imageUrl = document.querySelector('#poster-image-url')
+var motivTitle = document.querySelector('#poster-title')
+var motivQuote = document.querySelector('#poster-quote')
+var buttonShowMyPoster = document.querySelector('.make-poster')
+var buttonSavePoster = document.querySelector('.save-poster')
+var buttonShowSavedPoster = document.querySelector('.show-random')
+var unmotivButton = document.querySelector('.show-unmotiv')
+var unmotivSection = document.querySelector('.unmotiv-section')
+var buttonBackToMainUnmotiv = document.querySelector('.back-to-main-unm')
+var unmotivPostersGrid = document.querySelector('.unmotiv-posters-grid')
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -101,13 +123,144 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
+let unmotivationalPosters = [
+  {
+    name: "FAILURE",
+    description: "Why bother trying? It's probably not worth it.",
+    price: 68.00,
+    year: 2019,
+    vintage: true,
+    img_url: "./assets/failure.jpg",
+  },
+  {
+    name: "MEDIOCRITY",
+    description: "Dreams are just that—dreams.",
+    price: 127.00,
+    year: 2021,
+    vintage: false,
+    img_url: "./assets/mediocrity.jpg",
+  },
+  {
+    name: "REGRET",
+    description: "Hard work rarely pays off.",
+    price: 89.00,
+    year: 2018,
+    vintage: true,
+    img_url:  "./assets/regret.jpg",
+  },
+  {
+    name: "FUTILITY",
+    description: "You're not good enough.",
+    price: 150.00,
+    year: 2016,
+    vintage: false,
+    img_url:  "./assets/futility.jpg",
+  },
+  {
+    name: "DEFEAT",
+    description: "It's too late to start now.",
+    price: 35.00,
+    year: 2023,
+    vintage: false,
+    img_url:  "./assets/defeat.jpg",
+  },
+  {
+    name: "HOPELESSNESS",
+    description: "Stay in your comfort zone; it's safer.",
+    price: 112.00,
+    year: 2020,
+    vintage: true,
+    img_url: "./assets/hopelessness.jpg",
+  },
+  {
+    name: "LAZINESS",
+    description: "You can't change anything.",
+    price: 25.00,
+    year: 2022,
+    vintage: false,
+    img_url: "./assets/laziness.jpg",
+  },
+  {
+    name: "PROCRASTINATION",
+    description: "Better to avoid failure by not trying at all.",
+    price: 48.00,
+    year: 2017,
+    vintage: true,
+    img_url: "./assets/procrastination.jpg",
+  },
+  {
+    name: "DESPAIR",
+    description: "Let someone else do it; you’ll just mess it up.",
+    price: 73.00,
+    year: 2015,
+    vintage: false,
+    img_url: "./assets/despair.jpg",
+  },
+  {
+    name: "NEGLECT",
+    description: "Happiness is overrated.",
+    price: 160.00,
+    year: 2019,
+    vintage: true,
+    img_url: "./assets/neglect.jpg",
+  },
+  {
+    name: "FEAR",
+    description: "Giving up is always an option.",
+    price: 91.00,
+    year: 2014,
+    vintage: false,
+    img_url: "./assets/fear.jpg",
+  },
+  {
+    name: "APATHY",
+    description: "No one cares about your effort.",
+    price: 110.00,
+    year: 2016,
+    vintage: true,
+    img_url: "./assets/apathy.jpg",
+  },
+  {
+    name: "MISERY",
+    description: "Why take risks when you can stay stagnant?",
+    price: 55.00,
+    year: 2021,
+    vintage: false,
+    img_url: "./assets/misery.jpg",
+  },
+  {
+    name: "BLAME",
+    description: "Expect disappointment and you'll never be disappointed.",
+    price: 39.00,
+    year: 2017,
+    vintage: true,
+    img_url: "./assets/blame.jpg",
+  },
+  {
+    name: "DOUBT",
+    description: "Success is for other people, not you.",
+    price: 140.00,
+    year: 2020,
+    vintage: false,
+    img_url: "./assets/doubt.jpg",
+  }
+];
 
 // event listeners go here 👇
+buttonRandom.addEventListener('click', showRandomPosters)
+buttonYourOwn.addEventListener('click', showYourOwn)
+buttonNevermind.addEventListener('click', neverMindTakeBack)
+buttonSavedPosters.addEventListener('click', showSavedPoster)
+buttonBackMain.addEventListener('click', backToMain)
+buttonShowMyPoster.addEventListener('click', showNewPoster)
+buttonSavePoster.addEventListener('click', saveThePoster)
+unmotivButton.addEventListener('click', showUnmotivPosters)
+buttonBackToMainUnmotiv.addEventListener('click', goBackToMainUnmotiv)
+
 
 // functions and event handlers go here 👇
-// (we've provided two to get you started)!
 function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+  return Math.floor(Math.random() * array.length);   
 }
 
 function createPoster(imageURL, title, quote) {
@@ -115,55 +268,120 @@ function createPoster(imageURL, title, quote) {
     id: Date.now(), 
     imageURL: imageURL, 
     title: title, 
-    quote: quote}
+    quote: quote
   }
-// querying” the DOM to get access to the elements i need to change
-//  why i cant call imageurl directly on the funct, instead of the var i assigned to
-//“I don’t want to use the function name directly — I want to use the object that was returned when I called the function.”
-var posterImg = document.querySelector('.poster-img')
-var posterTitle = document.querySelector('.poster-title')
-var posterQuote = document.querySelector('.poster-quote')
-var myPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
-posterImg.src = myPoster.imageURL
-posterTitle.innerText = myPoster.title
-posterQuote.innerText = myPoster.quote
+}
 
-var buttonRandom = document.querySelector('.show-random')
-buttonRandom.addEventListener('click', showRandomPosters)
+showRandomPosters()
+
 function showRandomPosters () {
-  myPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
+  var myPoster = createPoster(images[getRandomIndex(images)], titles[getRandomIndex(titles)], quotes[getRandomIndex(quotes)])
   posterImg.src = myPoster.imageURL
   posterTitle.innerText = myPoster.title
   posterQuote.innerText = myPoster.quote
+  currentPoster = myPoster
 }
-var buttonYourOwn = document.querySelector('.show-form')
-var posterFormHidden = document.querySelector('.poster-form')
-var mainSection = document.querySelector('.main-poster')
-buttonYourOwn.addEventListener('click', showYourOwn)
+
 function showYourOwn() {
   mainSection.classList.add('hidden')
   posterFormHidden.classList.remove('hidden')
 }
 
-var buttonNevermind = document.querySelector('.show-main')
-buttonNevermind.addEventListener('click', neverMindTakeBack)
 function neverMindTakeBack() {
   posterFormHidden.classList.add('hidden')
   mainSection.classList.remove('hidden')
 }
 
-var buttonSavedPosters = document.querySelector('.show-saved')
-var savedPosters = document.querySelector('.saved-posters')
-buttonSavedPosters.addEventListener('click', showSavedPoster)
 function showSavedPoster() {
   mainSection.classList.add('hidden')
-  savedPosters.classList.remove('hidden')
+  savedPost.classList.remove('hidden')
+  savedPostersGrid.innerHTML = ''
+  for (let i = 0; i < savedPosters.length; i++) {
+     let poster = savedPosters[i]
+      savedPostersGrid.innerHTML += `
+      <div class="mini-poster">
+         <img src="${poster.imageURL}">
+         <h1>${poster.title}</h1>
+         <h3>${poster.quote}</h3>
+      </div>
+     `
+   }
 } 
 
-var buttonBackMain = document.querySelector('.back-to-main')
-buttonBackMain.addEventListener('click', backToMain)
 function backToMain () {
-  savedPosters.classList.add('hidden')
+  savedPost.classList.add('hidden')
   mainSection.classList.remove('hidden')
 }
 
+function showNewPoster(event) {
+   event.preventDefault()
+   var input = getPosterInput()
+   currentPoster = createPoster(input.image, input.title, input.quote)
+   saveInputsToArray(currentPoster)
+   displayPoster(currentPoster)
+   showMainView()
+}
+
+function getPosterInput() {
+  return {
+    image: imageUrl.value,
+    title: motivTitle.value,
+    quote: motivQuote.value
+  }
+}
+
+function saveInputsToArray(poster) {
+  images.push(poster.imageURL)
+  titles.push(poster.title)
+  quotes.push(poster.quote)
+}
+
+function displayPoster(poster) {
+  posterImg.src = poster.imageURL
+  posterTitle.innerText = poster.title
+  posterQuote.innerText = poster.quote 
+}
+
+function showMainView() {
+  mainSection.classList.remove('hidden')
+  posterFormHidden.classList.add('hidden')
+}
+
+function saveThePoster() {
+  if (!savedPosters.some(poster => poster.id === currentPoster.id)) {
+    savedPosters.push(currentPoster);
+  }
+}
+
+function showUnmotivPosters() {
+  mainSection.classList.add('hidden')
+  unmotivSection.classList.remove('hidden')
+  showUnmotivPostersArray(cleanDataArray)
+}
+
+function goBackToMainUnmotiv () {
+  unmotivSection.classList.add('hidden')
+  mainSection.classList.remove('hidden')
+}
+
+function cleanData(unmotivationalPosters) {
+  let cleaned = []
+  for (let i = 0; i < unmotivationalPosters.length; i++ ) {
+    let unPoster = unmotivationalPosters[i]
+    let cleanPoster = createPoster(unPoster.img_url, unPoster.name, unPoster.description)
+    cleaned.push(cleanPoster)
+  }
+  return cleaned 
+}
+
+var cleanDataArray = cleanData(unmotivationalPosters)
+function showUnmotivPostersArray(cleanDataArray) {
+  for (let i = 0; i < cleanDataArray.length; i ++) {
+    let cleanPost = cleanDataArray[i]
+    unmotivPostersGrid.innerHTML += `<div class="mini-poster">
+    <img src='${cleanPost.imageURL}'> 
+    <h1>${cleanPost.title}</h1>
+    <h3>${cleanPost.quote}</h3>
+    </div>`
+  }
+}
