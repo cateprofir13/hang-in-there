@@ -36,7 +36,7 @@ The steps a person should take are:
 
 ### Preview of App:
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
-!(cat.png)
+!cat.png
 ### Context:
 [//]: <> (Give some context for the project here. How long did you have to work on it? How far into the Turing program are you?)
 I am a Mod 2 student, currently in my second week, learning HTML, CSS, and JavaScript. I’ve worked on this project every day for the past 10 days, averaging about 3 hours a day.
