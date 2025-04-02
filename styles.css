@@ -144,3 +144,21 @@ button:hover {
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+
+.unmotiv-posters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: rgb(237, 233, 233);
+}
+.unmotiv-mini {
+  background-color: grey;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+.unmotiv-mini h1 {
+  color: black;
+  
+}

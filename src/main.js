@@ -378,7 +378,7 @@ var cleanDataArray = cleanData(unmotivationalPosters)
 function showUnmotivPostersArray(cleanDataArray) {
   for (let i = 0; i < cleanDataArray.length; i ++) {
     let cleanPost = cleanDataArray[i]
-    unmotivPostersGrid.innerHTML += `<div class="mini-poster" data-title="${cleanPost.title}">
+    unmotivPostersGrid.innerHTML += `<div class="mini-poster unmotiv-mini" data-title="${cleanPost.title}">
     <img src='${cleanPost.imageURL}'> 
     <h1>${cleanPost.title}</h1>
     <h3>${cleanPost.quote}</h3>
