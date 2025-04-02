@@ -123,6 +123,7 @@ var quotes = [
 ];
 var savedPosters = [];
 var currentPoster;
+var cleanedData = []
 let unmotivationalPosters = [
   {
     name: "FAILURE",
@@ -256,6 +257,7 @@ buttonShowMyPoster.addEventListener('click', showNewPoster)
 buttonSavePoster.addEventListener('click', saveThePoster)
 unmotivButton.addEventListener('click', showUnmotivPosters)
 buttonBackToMainUnmotiv.addEventListener('click', goBackToMainUnmotiv)
+unmotivPostersGrid.addEventListener('dblclick', deletePoster)
 
 
 // functions and event handlers go here 👇
@@ -356,7 +358,7 @@ function saveThePoster() {
 function showUnmotivPosters() {
   mainSection.classList.add('hidden')
   unmotivSection.classList.remove('hidden')
-  showUnmotivPostersArray(cleanDataArray)
+  showUnmotivPostersArray()
 }
 
 function goBackToMainUnmotiv () {
@@ -365,19 +367,19 @@ function goBackToMainUnmotiv () {
 }
 
 function cleanData(unmotivationalPosters) {
-  let cleaned = []
   for (let i = 0; i < unmotivationalPosters.length; i++ ) {
     let unPoster = unmotivationalPosters[i]
     let cleanPoster = createPoster(unPoster.img_url, unPoster.name, unPoster.description)
-    cleaned.push(cleanPoster)
+    cleanedData.push(cleanPoster)
+    
   }
-  return cleaned 
 }
+cleanData(unmotivationalPosters)
 
-var cleanDataArray = cleanData(unmotivationalPosters)
-function showUnmotivPostersArray(cleanDataArray) {
-  for (let i = 0; i < cleanDataArray.length; i ++) {
-    let cleanPost = cleanDataArray[i]
+function showUnmotivPostersArray() {
+  unmotivPostersGrid.innerHTML = '';
+  for (let i = 0; i < cleanedData.length; i ++) {
+    let cleanPost = cleanedData[i]
     unmotivPostersGrid.innerHTML += `<div class="mini-poster unmotiv-mini" data-title="${cleanPost.title}">
     <img src='${cleanPost.imageURL}'> 
     <h1>${cleanPost.title}</h1>
@@ -390,19 +392,11 @@ unmotivPostersGrid.addEventListener('dblclick', deletePoster)
 function deletePoster(event) {
   const miniPosterTarget = event.target.closest('.mini-poster')
   const title = miniPosterTarget.dataset.title
-  for (let i = 0; i < cleanDataArray.length; i ++) {
-   if(cleanDataArray[i].title === title) {
-        cleanDataArray.splice(i, 1)
+  for (let i = 0; i < cleanedData.length; i ++) {
+   if(cleanedData[i].title === title) {
+        cleanedData.splice(i, 1)
         break
    }
   }
-  unmotivPostersGrid.innerHTML = ''
-  showUnmotivPostersArray(cleanDataArray)
-  console.log(event)
-  console.log(miniPosterTarget.dataset.title)
+  showUnmotivPostersArray()
 }
-
-// targeting the element we want to delete
-// iterate over clean data and target the post somehow 
-// remove from the array somehow
-// call the function showUnmotivPostersArray on the updated array
